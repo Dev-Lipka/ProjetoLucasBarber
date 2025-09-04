@@ -16,17 +16,17 @@ Projeto com foco em ser minha primeira experiencia real com programação como f
 
 ## 🔹 Semana 2 – Web Scraping básico
 
-- [ ] Instalar Puppeteer (`npm install puppeteer`)
-- [ ] Criar script que abre o navegador e acessa o site da barbearia
-- [ ] Fazer bot pegar **título da página** e mostrar no console (primeiro teste)
-- [ ] Navegar até a página de agendamento
-- [ ] Extrair horários disponíveis (mesmo que em formato de texto simples)
+- [x] Instalar Puppeteer (`npm install puppeteer`)
+- [x] Criar script que abre o navegador e acessa o site da barbearia
+- [x] Fazer bot pegar **título da página** e mostrar no console (primeiro teste)
+- [x] Navegar até a página de agendamento
+- [x] Extrair horários disponíveis (mesmo que em formato de texto simples)
 
 ---
 
 ## 🔹 Semana 3 – Fluxo de Agendamento
 
-- [ ] Criar script que seleciona um serviço (ex: corte de cabelo)
+- [x] Criar script que seleciona um serviço (ex: corte de cabelo)
 - [ ] Preencher nome e telefone fictício
 - [ ] Confirmar o agendamento (teste)
 - [ ] Capturar a mensagem de confirmação do site
@@ -67,7 +67,3 @@ Projeto com foco em ser minha primeira experiencia real com programação como f
 - [ ] Desligar scraping e usar só seu sistema novo
 
 ---
-
-## Resumo do que já foi feito
-
-- Instalado Node.js v lts
