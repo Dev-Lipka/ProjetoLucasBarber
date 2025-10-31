@@ -1,7 +1,7 @@
 const pup = require("puppeteer");
 
 const url = "https://whatsagenda.com.br/barber-shop-carioca";
-const date = "4-11-2025"; // não pode ter 0, erro com tratamento interno e sem acesso no código original
+const date = "3-3-2026"; // não pode ter 0, erro com tratamento interno e sem acesso no código fonte
 
 //Seletores
 const servicos = ".form-check-input"; //seleciona todos os servicos
@@ -15,6 +15,8 @@ const classeBotoesHorarios = ".chooseHorarioBtn"; //Classe que contem todos os b
 
 (async () => {
   let browser; //garante que com erro e sem erro no "finaly" o processo seja encerrado, sem processo zumbi
+  const mes = await getMonthYear(date, 1);
+  const ano = await getMonthYear(date, 2);
   try {
     browser = await pup.launch({ headless: true }); // abre o navegador || headless(escondido) defalut:true(pode deixar sem)
     const page = await browser.newPage(); //abre uma nova guia
@@ -35,7 +37,10 @@ const classeBotoesHorarios = ".chooseHorarioBtn"; //Classe que contem todos os b
     await selectService(page, servicos, "Seleção Cabelo e Barba");
     await waitAndClick(page, barbeiro, "Seelção do Barbeiro");
     await waitAndClick(page, buttonDate, "Abriu o calendário");
+    await selectClick(page, 1, mes, "Selecionou mês");
+    await selectClick(page, 2, ano, "Selecionou ano");
     await waitAndClick(page, selectDate, `Selecionou a Data(${date})`);
+    console.log(`teste função pega mes é ${mes} e ano ${ano}`);
 
     //Verifica se tem horário e seleciona todos os botões de horários, depois extrai os valores para dentro de um array
     try {
@@ -71,7 +76,7 @@ const classeBotoesHorarios = ".chooseHorarioBtn"; //Classe que contem todos os b
   }
 })();
 
-//  --- Função auxiliar ---
+//  --- Funções auxiliares ---
 
 async function waitAndClick(page, selector, logMessage) {
   await page.waitForSelector(selector);
@@ -84,4 +89,23 @@ async function selectService(page, servicos, logMessage) {
   console.log(`Ação concluída: ${logMessage}`);
 }
 
-//estrutura
+async function selectClick(page, index, value, logMessage) {
+  const seletorSelect = `select.form-select:nth-of-type(${index})`;
+  const valueSelect = value;
+
+  await page.select(seletorSelect, valueSelect);
+
+  console.log(`Ação concluída: ${logMessage}`);
+}
+async function getMonthYear(date, index) {
+  const partes = date.split("-");
+  let value = "";
+  if (index === 1) {
+    value = partes[1];
+  } else if (index === 2) {
+    value = partes[2];
+  } else {
+    console.log("Deu algum erro!");
+  }
+  return value;
+}
